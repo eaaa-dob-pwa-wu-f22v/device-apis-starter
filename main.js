@@ -88,3 +88,12 @@ document.querySelector("button#speak").addEventListener("click", function () {
     console.error(error);
   }
 });
+
+// 9.06 Read from a file ---------------------------------------------
+document
+  .querySelector("#file-input")
+  .addEventListener("change", async function () {
+    const file = this.files[0];
+    const text = await file.text();
+    document.querySelector("#text-content").value = text;
+  });

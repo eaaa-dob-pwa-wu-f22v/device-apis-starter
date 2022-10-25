@@ -26,3 +26,15 @@ document.querySelector("button#locate-me").addEventListener("click", () => {
     console.error("Geolocation API not supported");
   }
 });
+
+// 9.02 Network status -----------------------------------------------
+const networkStatusNode = document.querySelector("#network-status");
+
+function setNetworkStatus() {
+  networkStatusNode.textContent = navigator.onLine ? "online" : "offline";
+}
+
+setNetworkStatus();
+
+window.addEventListener("online", setNetworkStatus);
+window.addEventListener("offline", setNetworkStatus);

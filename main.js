@@ -70,3 +70,21 @@ document.querySelector("button#share").addEventListener("click", async () => {
     console.error(error);
   }
 });
+
+// 9.05 Speech -------------------------------------------------------
+document.querySelector("button#speak").addEventListener("click", function () {
+  try {
+    window.speechSynthesis.speak(
+      new SpeechSynthesisUtterance(
+        document.querySelector("#text-content").value
+      )
+    );
+    // Gratuitous animation
+    this.classList.toggle("animate-spin");
+    setTimeout(() => {
+      this.classList.toggle("animate-spin");
+    }, 1000);
+  } catch (error) {
+    console.error(error);
+  }
+});

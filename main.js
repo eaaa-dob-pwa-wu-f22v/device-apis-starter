@@ -59,3 +59,14 @@ document
       console.error(error);
     }
   });
+
+// 9.04 Sharing ------------------------------------------------------
+document.querySelector("button#share").addEventListener("click", async () => {
+  try {
+    await navigator.share({
+      text: document.querySelector("#text-content").value,
+    });
+  } catch (error) {
+    console.error(error);
+  }
+});

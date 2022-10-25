@@ -38,3 +38,24 @@ setNetworkStatus();
 
 window.addEventListener("online", setNetworkStatus);
 window.addEventListener("offline", setNetworkStatus);
+
+// 9.03 Copy to clipboard --------------------------------------------
+document
+  .querySelector("button#copy-to-clipboard")
+  .addEventListener("click", async function () {
+    try {
+      if (!navigator.clipboard) {
+        throw new Error("Clipboard API not supported");
+      }
+      await navigator.clipboard.writeText(
+        document.querySelector("#text-content").value
+      );
+      // Gratuitous animation
+      this.classList.toggle("animate-spin");
+      setTimeout(() => {
+        this.classList.toggle("animate-spin");
+      }, 1000);
+    } catch (error) {
+      console.error(error);
+    }
+  });

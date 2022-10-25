@@ -1,5 +1,14 @@
-for (const button of document.querySelectorAll("button[id]")) {
-  button.addEventListener("click", () => {
-    alert("Not implemented yet.");
-  });
+// Geolocation
+const geolocationNode = document.querySelector("#geolocation");
+
+function handleGeoLocation(pos) {
+  geolocationNode.textContent = `${pos.coords.latitude} ${pos.coords.longitude}`;
 }
+
+document.querySelector("button#locate-me").addEventListener("click", () => {
+  if ("geolocation" in navigator) {
+    navigator.geolocation.getCurrentPosition(handleGeoLocation);
+  } else {
+    console.error("Geolocation API not supported");
+  }
+});

@@ -1,8 +1,22 @@
-// Geolocation
+// 9.01 Geolocation
 const geolocationNode = document.querySelector("#geolocation");
 
-function handleGeoLocation(pos) {
-  geolocationNode.textContent = `${pos.coords.latitude} ${pos.coords.longitude}`;
+async function handleGeoLocation(pos) {
+  try {
+    const reverseGeocodingResult = await fetch(
+      `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${pos.coords.latitude}&longitude=${pos.coords.longitude}&localityLanguage=en`
+    ).then((res) => res.json());
+
+    geolocationNode.textContent = [
+      reverseGeocodingResult.city,
+      reverseGeocodingResult.locality,
+      reverseGeocodingResult.countryName,
+    ]
+      .filter(Boolean)
+      .join(", ");
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 document.querySelector("button#locate-me").addEventListener("click", () => {
